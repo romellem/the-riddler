@@ -5,8 +5,8 @@ description: Solutions to FiveThiryEight's weekly The Riddler posts.
 
 data:
   projects:
-    sample 1
-    sample 2
-    sample 3
-    nested:
-      isn't this cool?
+    - sample 1
+    - sample 2
+    - sample 3
+    - nested:
+      - isn't this cool?
