@@ -2,6 +2,6 @@
 title: Index
 ---
 
-# Index
+# [](#index)Index
 
 Hello World!
