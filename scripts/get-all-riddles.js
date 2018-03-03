@@ -58,8 +58,8 @@ const NEXT_BUTTON_SELECTOR = '.links .link-sectionmore:not(.sectionprevious)';
 
     all_elements = all_elements.concat(current_elements);
 
-    let results_yaml = fs.writeFileSync('./riddler-result.yml', yaml.dump(all_elements, {lineWidth:9999}));
-    console.log('Written to riddler-result.yml');
+    let results_yaml = fs.writeFileSync('./riddles.yml', yaml.dump(all_elements, {lineWidth:9999}));
+    console.log('Written to riddles.yml');
 
     await browser.close();
 })();
