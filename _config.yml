@@ -1,5 +1,10 @@
 theme: jekyll-theme-primer
 
+exclude:
+  - node_modules
+  - scripts
+  - update-table-of-contents.js
+
 title: The Riddler Solutions
 description: Solutions to FiveThiryEight's weekly The Riddler posts.
 
