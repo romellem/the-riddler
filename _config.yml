@@ -3,10 +3,6 @@ theme: jekyll-theme-primer
 title: The Riddler Solutions
 description: Solutions to FiveThiryEight's weekly The Riddler posts.
 
-data:
-  projects:
-    - sample 1
-    - sample 2
-    - sample 3
-    - nested:
-      - isn't this cool?
+exclude:
+    - node_modules/
+    - package.json
