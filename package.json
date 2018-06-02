@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/romellem/the-riddler/issues"
   },
-  "homepage": "https://github.com/romellem/the-riddler#readme"
+  "homepage": "https://github.com/romellem/the-riddler#readme",
+  "dependencies": {
+    "puppeteer": "^1.4.0"
+  }
 }
