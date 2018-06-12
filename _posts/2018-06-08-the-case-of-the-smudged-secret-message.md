@@ -15,12 +15,12 @@ title: The Case Of The Smudged Secret Message
 > In the first equation, letters accidentally were smudged on their clandestine journey to
 > a safe room within Riddler Headquarters and are now unreadable. (These are represented
 > with dashes below.) But we know that all 10 digits, 0 through 9, appear in the equation.
-
-        E X M R E E K
-    +   E H K R E K K
-    -----------------
-      - K - H - X - E
-
+>
+>         E X M R E E K
+>     +   E H K R E K K
+>     -----------------
+>       - K - H - X - E
+>
 > What digits belong to what letters, and what are the dashes?
 
 ---
