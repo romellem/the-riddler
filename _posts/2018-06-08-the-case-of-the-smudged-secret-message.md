@@ -63,18 +63,18 @@ Let's fill that in
     ---------------------
       1 E , H F I , B J A
 
-Sticking with that "two seven digit numbers summing to an _eight_ digit sum" idea,
-the first digit of each term is the same (an `A`), so that tells me `A` has to be
-a **5**, **6**, **7**, **8**, or **9**.
+Sticking with that "two seven digit numbers summing to an _eight_ digit number" idea,
+the first digit of each term in our sum is the same (an `A`), so that tells me `A` has
+to be a **5**, **6**, **7**, **8**, or **9**.
 
-Think about it, say `A` was a 4. Ignore the fact that the numbers after it vary, let's
-make a 7 digit number that starts with 4 be the larger possible: we get _4,999,999_.
+Think about it, say `A` was a 4.
+Let's make the largest possible seven digit number that starts with 4: we get _4,999,999_.
 4,999,999 + 4,999,999 = _9,999,998_, which is obviously not an eight digit number.
-This thought is similar for a seven digit number that starts with 3, 2, or 1. So, we know
-`A` is a 5 or greater.
+If we have a seven digit number that starts with 3, 2, or 1, we'll get a similar result.
+So, we know `A` is a 5 or greater.
 
-Next thing I notice, is the last digit of our two terms is the same, they are both `E`s.
-Plus, they add up to a digit who's last digit is `A`! This is important because, `E + E`
+Next thing I notice, is the last digit of the terms is the same: they are both `E`s.
+Plus, they add up to a number who's last digit is `A`! This is important because, `E + E`
 is the same just writing `2E`, which means `E + E` is an _even_ number.
 
 We don't know if `E + E` is a one digit or two digit number, but its _last_ digit has to
@@ -82,15 +82,15 @@ be even. We know its last digit is `A`, so `A` has to be even.
 
 Thus our list for potential digits of `A` just got way shorter.
 
-Now we know `A` is either a **6** or and **8**.
+If `A` is a 5 or greater, _and_ it is event, then `A` is either a **6** or an **8**.
 
-OK, let's guess **8**. So `E + E` has to sum to a one or two-digit number that ends in 8.
+OK, let's guess that `A` is **8**. So `E + E` has to sum to a one- or two-digit number that ends in 8.
 That means our choices are `E + E = 8` or `E + E = 18`, which corresponds to `E` is either
 **4** or **9**, respectively.
 
-However, look at our sum. We know the second digit is `E`! So, if `E` is a **4** or a **9**,
-then some number _8,xxx,xxx_ (_note_: _x_ is just a placeholder for any digit, it doesn't
-matter what at this point) plus some other number _8,xxx,xxx_ has to sum to an eight digit
+However, look at our main equation. We know the second digit of the final sum is `E`!
+So, if `E` is a **4** or a **9**,
+then some number _8,xxx,xxx_ plus some other number _8,xxx,xxx_ has to sum to an eight digit
 number where the second digit is a **4** or **9**.
 
 Think about that, there is no such number! 8,xxx,xxx + 8,xxx,xxx has to equal
@@ -101,8 +101,8 @@ This can be shown through a similar approach to when we figured out that `A` had
 8,000,000 + 8,000,000 = _16,000,000_, yielding an eight-digit number where the second digit
 is a **6**. Next, take the two largest seven-digit numbers that begin with 8: _8,999,999_.
 8,999,999 + 8,999,999 = _17,999,998_, yielding an eight-digit number where the second digit
-is a **7**. So by induction, any seven-digit number that begins with an 8 _has_ to have
-a second digit of either **6** or **7**, but from above, the only valid choices for
+is a **7**. So by induction, summing two seven-digit numbers that begins with an 8 _has_ to have
+a sum which has a second digit of either **6** or **7**. But the only valid choices for
 `E` are **4** or **9**!
 
 That means we have a contradiction, so `A` _can't be_ an **8**.
@@ -128,7 +128,7 @@ That means, looking at the intersection of our two possible lists, we have deter
 
 - `E` _has_ to be **3**
 
-Fill that into our equation:
+Filling that into our equation:
 
         6 , B C D , 6 6 3
     +   6 , F 3 D , 6 3 3
@@ -213,7 +213,8 @@ _Unused digits_:
 - 7
 
 Let's look at `D`. Since we only have three digits remaining, let's just plug each of them
-(4, 5, and 7) into `D` and see if any give us a contradiction. Remember the _1_ we had to carry before into the thousand's place?
+(4, 5, and 7) into `D` and see if any give us a contradiction. Remember the _1_ we had to
+carry before into the thousand's place?
 
                 
                 1 <- carried over
@@ -278,3 +279,5 @@ Finally, filling that in gives us:
     +   6 , 8 3 7 , 6 3 3
     ---------------------
       1 3 , 0 8 5 , 2 9 6
+
+Double checking that equation, the math works out, so we have our answer!
