@@ -54,7 +54,7 @@ Since the dashes are all unique, let's just assign them their own variable lette
 OK, so the first thing I notice is that we are adding two seven digit numbers and getting
 an _eight_ digit sum. That means that the first digit of our sum is a **1**, or rather:
 
-- `G` _has_ to be **1**.
+#### `G` _has_ to be **1**.
 
 Let's fill that in
 
@@ -109,7 +109,7 @@ That means we have a contradiction, so `A` _can't be_ an **8**.
 
 OK, so by process of eliminitation:
 
-- `A` _has_ to be **6**
+#### `A` _has_ to be **6**
 
 Let's fill that into our equation:
 
@@ -126,7 +126,7 @@ has to be either a **2** or a **3**.
 
 That means, looking at the intersection of our two possible lists, we have determined that
 
-- `E` _has_ to be **3**
+#### `E` _has_ to be **3**
 
 Filling that into our equation:
 
@@ -137,8 +137,8 @@ Filling that into our equation:
 
 We have enough digits to fully calculate what `B` and `J` are! Doing the math, we find that:
 
-- `J` _has_ to be **9**
-- `B` _has_ to be **2**
+#### `J` _has_ to be **9**
+#### `B` _has_ to be **2**
 
 Once again, filling that into the equation gives us:
 
@@ -183,7 +183,7 @@ We already know the second digit of the first term: it is **2**. That means, the
 of the second term is either **8** or **9**. Looking at list of unused digits above, only
 **8** is available, so we've solved another digit! Namly:
 
-- `F` _has_ to be **8**
+#### `F` _has_ to be **8**
 
 Filling that in:
 
@@ -196,7 +196,7 @@ Let's look at the third digit of our sum: `H`. We can see from the **2** and the
 it has to be a **0** or a **1** (in the case `C + 3` results in a ten's place digit carrying over).
 However, we've already used **1**, so that means:
 
-- `H` _has_ to be **0**
+#### `H` _has_ to be **0**
 
 Getting close! So far we have:
 
@@ -246,7 +246,7 @@ so `D` can't equal **5**.
 
 By process of elimintation, that means that
 
-- `D` _has_ to be **7**
+#### `D` _has_ to be **7**
 
 Filling that in, we get:
 
@@ -258,7 +258,7 @@ Filling that in, we get:
 
 We can now fill in `I`, which shows that:
 
-- `I` _has_ to be **5**
+#### `I` _has_ to be **5**
 
 Almost done, we have:
 
@@ -269,7 +269,7 @@ Almost done, we have:
 
 And last but not least, we have only have `C` remaining, which means:
 
-- `C` _has_ to be **4**
+#### `C` _has_ to be **4**
 
 Finally, filling that in gives us:
 
