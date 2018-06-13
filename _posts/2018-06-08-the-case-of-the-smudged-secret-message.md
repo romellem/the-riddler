@@ -205,7 +205,7 @@ Getting close! So far we have:
     ---------------------
       1 3 , 0 8 I , 2 9 6
 
-We have three digits left to figure out. Sliming down our _unused_ list from before means we now have:
+We have three digits left to figure out. Slimming down our _unused_ list from before means we now have:
 
 _Unused digits_:  
 - 4
