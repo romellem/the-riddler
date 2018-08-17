@@ -33,6 +33,9 @@ Highest Card:
            placeholder="Minimum value of 3"
            min="3" value="10" />
 
+_Simulations_:
+<input type="number" id="total-simulations" name="total-simulations" value="1000000" step="100" />
+
 <button id="get-percentage-chance">Calculate chance of winning game with above deck</button>
 
 ## Solution
@@ -56,7 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Wait 500ms, and simulate our game a million times
     var calculateChanceOfWinning = function(force_lowest, force_highest) {
-        var SIMULATIONS = 1000000;
+        var SIMULATIONS = parseInt(document.getElementById('total-simulations').value);
+        if (!(SIMULATIONS > 0)) {
+            SIMULATIONS = 1000000
+        }
 
         console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
 
