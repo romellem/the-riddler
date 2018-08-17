@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var calculateChanceOfWinning = function(force_lowest, force_highest) {
         var SIMULATIONS = parseInt(document.getElementById('total-simulations').value);
         if (!(SIMULATIONS > 0)) {
-            SIMULATIONS = 1000000
+            SIMULATIONS = 1000000;
         }
 
         console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
@@ -83,14 +83,19 @@ document.addEventListener('DOMContentLoaded', function() {
             SIMULATIONS.toLocaleString() +
             ' (' +
             (WON_GAME / SIMULATIONS) * 100 +
-            '%)' + ' with a deck of ' +
-            lowest_value + ' - ' + highest_value;
+            '%)' +
+            ' with a deck of ' +
+            lowest_value +
+            ' - ' +
+            highest_value;
 
         console.log(complete_results_string);
 
         document.getElementById('complete-result').innerHTML = complete_results_string;
-    }
-    setTimeout(function() { calculateChanceOfWinning(2, 10) }, 500);
+    };
+    setTimeout(function() {
+        calculateChanceOfWinning(2, 10);
+    }, 500);
 
     document.getElementById('get-percentage-chance').addEventListener('click', function(e) {
         document.getElementById('complete-result').innerHTML =
