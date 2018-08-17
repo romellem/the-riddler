@@ -39,7 +39,7 @@ Highest Card:
 
 ## Solution
 
-<p id="complete-result">Running...</p>
+<p id="complete-result">Running with deck of 2 - 10...</p>
 
 ## Simulate a Game
 
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         var SIMULATIONS = 1000000;
 
         console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
-        document.getElementById('complete-result').innerHTML = 'Running...';
 
         var lowest_value = parseInt(lowest.value);
         var highest_value = parseInt(highest.value);
@@ -93,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(calculateChanceOfWinning, 500);
 
     document.getElementById('get-percentage-chance').addEventListener('click', function(e) {
-        setTimeout(calculateChanceOfWinning, 50);
+        document.getElementById('complete-result').innerHTML =
+            'Running with deck of ' + lowest.value + ' - ' + highest.value;
+        setTimeout(calculateChanceOfWinning, 250);
     });
 
     document.getElementById('simulate').addEventListener('click', function(e) {
