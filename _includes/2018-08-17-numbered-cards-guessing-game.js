@@ -49,11 +49,17 @@ function countRemainingCardsHigherOrLower(array, num) {
 }
 
 /**
- * @returns bool - True if you win, false if you lose
+ * @returns Object - return 'result' (bool if you won or not)
+ *                   and optionaly 'log' (string representation of the game)
  */
-function simulateGuessingGame(debug) {
-    // Defaults to _not_ output the game status
+function simulateGuessingGame(debug, log_joiner) {
+    // Defaults to _not_ returning game log
     debug = typeof debug === 'undefined' ? false : true;
+
+    // Joins log with new lines
+    log_joiner = typeof log_joiner === 'undefined' ? '\n' : log_joiner;
+
+    var log = [];
 
     var cards = shuffle([2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
@@ -62,12 +68,12 @@ function simulateGuessingGame(debug) {
     var card_index = getRandomInt(0, cards.length);
     var card = cards.splice(card_index, 1)[0];
 
-    debug && console.log('=== ' + number_card_picked + ' ===');
-    debug && console.log('\tFirst card is ' + card);
+    debug && log.push('=== ' + number_card_picked + ' ===');
+    debug && log.push('\tFirst card is ' + card);
 
     var lost_at_game = false;
     while (!lost_at_game && cards.length > 0) {
-        debug && console.log('=== ' + ++number_card_picked + ' ===');
+        debug && log.push('=== ' + ++number_card_picked + ' ===');
         var previous_card = card;
 
         var higher_and_lower = countRemainingCardsHigherOrLower(cards, previous_card);
@@ -77,53 +83,60 @@ function simulateGuessingGame(debug) {
         var choice, chance;
         if (higher > lower) {
             chance = Math.round((higher / (higher + lower)) * 100);
-            debug && console.log('\t' + chance + '% it is higher');
+            debug && log.push('\t' + chance + '% it is higher');
             choice = 'HIGHER';
         } else if (lower > higher) {
             chance = Math.round((lower / (higher + lower)) * 100);
-            debug && console.log('\t' + chance + '% it is lower');
+            debug && log.push('\t' + chance + '% it is lower');
             choice = 'LOWER';
         } else {
             chance = 50;
-            debug && console.log('\t' + '50 / 50 change it is higher or lower');
+            debug && log.push('\t' + '50 / 50 change it is higher or lower');
             choice = Math.random() < 0.5 ? 'HIGHER' : 'LOWER';
         }
 
-        debug && console.log('\t' + 'I am picking: ' + choice);
+        debug && log.push('\t' + 'I am picking: ' + choice);
 
         // Pick another card
         var card_index = getRandomInt(0, cards.length);
         var card = cards.splice(card_index, 1)[0];
 
-        debug && console.log('\t' + 'Picked ' + card);
+        debug && log.push('\t' + 'Picked ' + card);
         if (choice === 'HIGHER') {
             // Higher
             if (!(card > previous_card)) {
-                debug && console.log('\t' + card + ' is NOT HIGHER than ' + previous_card);
+                debug && log.push('\t' + card + ' is NOT HIGHER than ' + previous_card);
                 lost_at_game = true;
             }
         } else {
             // Lower
             if (!(card < previous_card)) {
-                debug && console.log('\t' + card + ' is NOT LOWER than ' + previous_card);
+                debug && log.push('\t' + card + ' is NOT LOWER than ' + previous_card);
                 lost_at_game = true;
             }
         }
 
         if (!lost_at_game) {
-            debug && console.log('\t' + card + ' IS ' + choice + ' than ' + previous_card);
+            debug && log.push('\t' + card + ' IS ' + choice + ' than ' + previous_card);
         }
 
-        debug && console.log('=========');
+        debug && log.push('=========');
     }
 
+    var return_val;
     if (!lost_at_game) {
-        debug && console.log('You Win!');
-        return true;
+        debug && log.push('You Win!');
+        return_val = { result: true };
     } else {
-        debug && console.log('You Lose!');
-        return false;
+        debug && log.push('You Lose!');
+        return_val = { result: false };
     }
+
+    if (debug) {
+        return_val.log = log.join(log_joiner);
+    }
+
+    return return_val;
 }
 
 /*
@@ -135,7 +148,7 @@ console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\
 
 var WON_GAME = 0;
 for (var i = 0; i < SIMULATIONS; i++) {
-    if (simulateGuessingGame()) {
+    if (simulateGuessingGame().result) {
         WON_GAME++;
     }
 }
