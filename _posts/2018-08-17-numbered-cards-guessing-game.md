@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
         document.getElementById('complete-result').innerHTML = 'Running...';
 
-        var lowest_value = lowest.value;
-        var highest_value = highest.value;
+        var lowest_value = parseInt(lowest.value);
+        var highest_value = parseInt(highest.value);
 
         var WON_GAME = 0;
         for (var i = 0; i < SIMULATIONS; i++) {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('simulate').addEventListener('click', function(e) {
-        var game = simulateGuessingGame(lowest.value, highest.value, true);
+        var game = simulateGuessingGame(parseInt(lowest.value), parseInt(highest.value), true);
 
         if (log.style.display === 'none') {
             log.style.display = 'block';

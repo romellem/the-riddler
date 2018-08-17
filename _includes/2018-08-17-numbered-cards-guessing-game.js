@@ -48,16 +48,27 @@ function countRemainingCardsHigherOrLower(array, num) {
     return { higher: higher, lower: lower };
 }
 
+var deck_cache = {};
 
 /**
  * @returns Object - return 'result' (bool if you won or not)
  *                   and optionaly 'log' (string representation of the game)
  */
 function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
-    var deck = [];
-    for (var c = lowest_card; c <= highest_card; c++) {
-        deck.push(c);
+    var deck;
+    if (deck_cache[lowest_card + ',' + highest_card]) {
+        // Get copy of array
+        deck = deck_cache[lowest_card + ',' + highest_card].slice(0);
+    } else {
+        // Build our deck and cache it for copying later
+        deck = [];
+        for (var c = lowest_card; c <= highest_card; c++) {
+            deck.push(c);
+        }
+
+        deck_cache[lowest_card + ',' + highest_card] = deck.slice(0);
     }
+    
 
     // Defaults to _not_ returning game log
     debug = typeof debug === 'undefined' ? false : true;
