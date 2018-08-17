@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             result.innerHTML = 'You Lost!';
         }
 
-        document.getElementById('results').innerHTML = game.log;
+        log.innerHTML = game.log;
     });
 });
 
