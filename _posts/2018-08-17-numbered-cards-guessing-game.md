@@ -24,15 +24,32 @@ title: Numbered Cards Guessing Game
 ## Solution
 
 <button id="simulate">Simulate!</button>
-<pre id="results"></pre>
+<h2 id="result"></h2>
+<pre id="log" style="display: none"></pre>
 
 <script>
 {% include 2018-08-17-numbered-cards-guessing-game.js %}
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('simulate').addEventListener('click', function(e) {
-        var result = simulateGuessingGame(true);
-        document.getElementById('results').innerHTML = result.log;
+    var log = document.getElementById('log');
+    var result = document.getElementById('result');
+    
+    var main_game = document.getElementById('simulate').addEventListener('click', function(e) {
+        var game = simulateGuessingGame(true);
+
+        if (log.style.display === 'none') {
+            log.style.display = 'block';
+        }
+
+        if (game.result) {
+            result.style.color = "green";
+            result.innerHTML = 'You Won!';
+        } else {
+            result.style.color = "red";
+            result.innerHTML = 'You Lost!';
+        }
+
+        document.getElementById('results').innerHTML = game.log;
     })
 });
 </script>
