@@ -1,7 +1,7 @@
 {
-  "name": "the-riddler-blog",
+  "name": "riddler",
   "version": "0.0.1",
-  "description": "",
+  "description": "Solutions to FiveThiryEight's weekly The Riddler posts.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/romellem/the-riddler.git"
   },
-  "keywords": ["FiveThirtyEight"],
+  "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/romellem/the-riddler/issues"
+  },
+  "homepage": "https://github.com/romellem/the-riddler#readme",
+  "dependencies": {
+    "puppeteer": "^1.4.0"
+  }
 }
