@@ -77,7 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
             SIMULATIONS.toLocaleString() +
             ' (' +
             (WON_GAME / SIMULATIONS) * 100 +
-            '%)';
+            '%)' + ' with a deck of ' +
+            lowest_value + ' - ' + highest_value;
 
         console.log(complete_results_string);
 
