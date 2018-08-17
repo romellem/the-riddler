@@ -32,7 +32,7 @@ title: Numbered Cards Guessing Game
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('simulate').addEventListener('click', function(e) {
         var result = simulateGuessingGame(true);
-        document.getElementById('simulate').innerHTML = result.log;
+        document.getElementById('results').innerHTML = result.log;
     })
 });
 </script>
