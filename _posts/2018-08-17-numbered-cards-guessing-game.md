@@ -21,19 +21,52 @@ title: Numbered Cards Guessing Game
 
 ---
 
-## Solution
+## Simulate a Game
 
 <button id="simulate">Simulate!</button>
 <h2 id="result"></h2>
 <pre id="log" style="display: none"></pre>
 
+
+## Solution
+
+<p id="complete-result">Running...</p>
+
 <script>
 {% include 2018-08-17-numbered-cards-guessing-game.js %}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     var log = document.getElementById('log');
     var result = document.getElementById('result');
-    
+
+    // Wait 500ms, and simulate our game a million times
+    setTimeout(function() {
+        var SIMULATIONS = 1000000;
+
+        console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
+
+        var WON_GAME = 0;
+        for (var i = 0; i < SIMULATIONS; i++) {
+            if (simulateGuessingGame().result) {
+                WON_GAME++;
+            }
+        }
+
+        var complete_results_string =
+            'You won ' +
+            WON_GAME.toLocaleString() +
+            ' times out of ' +
+            SIMULATIONS.toLocaleString() +
+            ' (' +
+            (WON_GAME / SIMULATIONS) * 100 +
+            '%)';
+
+        console.log(complete_results_string);
+
+        document.getElementById('complete-result').innerHTML = complete_results_string;
+    }, 500);
+
     var main_game = document.getElementById('simulate').addEventListener('click', function(e) {
         var game = simulateGuessingGame(true);
 
@@ -42,14 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (game.result) {
-            result.style.color = "green";
+            result.style.color = 'green';
             result.innerHTML = 'You Won!';
         } else {
-            result.style.color = "red";
+            result.style.color = 'red';
             result.innerHTML = 'You Lost!';
         }
 
         document.getElementById('results').innerHTML = game.log;
-    })
+    });
 });
+
 </script>
