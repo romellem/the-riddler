@@ -28,8 +28,6 @@ Lowest Card:
            placeholder="Minimum value of 2"
            min="10" value="2" />
 
-<br>
-
 Highest Card:
 <input type="number" id="highest-card" name="highest-card"
            placeholder="Minimum value of 3"
@@ -47,12 +45,8 @@ Highest Card:
 <h2 id="result"></h2>
 <pre id="log" style="display: none"></pre>
 
-
-
-
 <script>
 {% include 2018-08-17-numbered-cards-guessing-game.js %}
-
 
 document.addEventListener('DOMContentLoaded', function() {
     var log = document.getElementById('log');
