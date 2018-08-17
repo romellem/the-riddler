@@ -48,11 +48,28 @@ function countRemainingCardsHigherOrLower(array, num) {
     return { higher: higher, lower: lower };
 }
 
+var deck_cache = {};
+
 /**
  * @returns Object - return 'result' (bool if you won or not)
  *                   and optionaly 'log' (string representation of the game)
  */
-function simulateGuessingGame(debug, log_joiner) {
+function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
+    var deck;
+    if (deck_cache[lowest_card + ',' + highest_card]) {
+        // Get copy of array
+        deck = deck_cache[lowest_card + ',' + highest_card].slice(0);
+    } else {
+        // Build our deck and cache it for copying later
+        deck = [];
+        for (var c = lowest_card; c <= highest_card; c++) {
+            deck.push(c);
+        }
+
+        deck_cache[lowest_card + ',' + highest_card] = deck.slice(0);
+    }
+    
+
     // Defaults to _not_ returning game log
     debug = typeof debug === 'undefined' ? false : true;
 
@@ -61,7 +78,7 @@ function simulateGuessingGame(debug, log_joiner) {
 
     var log = [];
 
-    var cards = shuffle([2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    var cards = shuffle(deck);
 
     // Pick first card
     var number_card_picked = 1;
@@ -148,7 +165,7 @@ console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\
 
 var WON_GAME = 0;
 for (var i = 0; i < SIMULATIONS; i++) {
-    if (simulateGuessingGame().result) {
+    if (simulateGuessingGame(2, 10).result) {
         WON_GAME++;
     }
 }

@@ -21,16 +21,34 @@ title: Numbered Cards Guessing Game
 
 ---
 
-## Simulate a Game
+### Card Values
 
-<button id="simulate">Simulate!</button>
-<h2 id="result"></h2>
-<pre id="log" style="display: none"></pre>
+Lowest Card:
+<input type="number" id="lowest-card" name="lowest-card"
+           placeholder="Minimum value of 2"
+           min="10" value="2" />
 
+<br>
+
+Highest Card:
+<input type="number" id="highest-card" name="highest-card"
+           placeholder="Minimum value of 3"
+           min="3" value="10" />
+
+<button id="get-percentage-chance">Calculate chance of winning game with above deck</button>
 
 ## Solution
 
 <p id="complete-result">Running...</p>
+
+## Simulate a Game
+
+<button id="simulate">Simulate one game</button>
+<h2 id="result"></h2>
+<pre id="log" style="display: none"></pre>
+
+
+
 
 <script>
 {% include 2018-08-17-numbered-cards-guessing-game.js %}
@@ -39,16 +57,22 @@ title: Numbered Cards Guessing Game
 document.addEventListener('DOMContentLoaded', function() {
     var log = document.getElementById('log');
     var result = document.getElementById('result');
+    var lowest = document.getElementById('lowest-card');
+    var highest = document.getElementById('highest-card');
 
     // Wait 500ms, and simulate our game a million times
-    setTimeout(function() {
+    var calculateChanceOfWinning = function() {
         var SIMULATIONS = 1000000;
 
         console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
+        document.getElementById('complete-result').innerHTML = 'Running...';
+
+        var lowest_value = lowest.value;
+        var highest_value = highest.value;
 
         var WON_GAME = 0;
         for (var i = 0; i < SIMULATIONS; i++) {
-            if (simulateGuessingGame().result) {
+            if (simulateGuessingGame(lowest_value, highest_value).result) {
                 WON_GAME++;
             }
         }
@@ -65,10 +89,15 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(complete_results_string);
 
         document.getElementById('complete-result').innerHTML = complete_results_string;
-    }, 500);
+    }
+    setTimeout(calculateChanceOfWinning, 500);
 
-    var main_game = document.getElementById('simulate').addEventListener('click', function(e) {
-        var game = simulateGuessingGame(true);
+    document.getElementById('get-percentage-chance').addEventListener('click', function(e) {
+        setTimeout(calculateChanceOfWinning, 50);
+    });
+
+    document.getElementById('simulate').addEventListener('click', function(e) {
+        var game = simulateGuessingGame(lowest.value, highest.value, true);
 
         if (log.style.display === 'none') {
             log.style.display = 'block';
