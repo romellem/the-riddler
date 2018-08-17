@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             result.innerHTML = 'You Won!';
         } else {
             result.style.color = 'red';
-            result.innerHTML = 'You Lost!';
+            result.innerHTML = 'You Lost! (Played ' + game.turns + ' turns before you lost)';
         }
 
         log.innerHTML = game.log;

@@ -68,6 +68,8 @@ function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
 
         deck_cache[lowest_card + ',' + highest_card] = deck.slice(0);
     }
+
+    var original_deck_length = deck.length;
     
 
     // Defaults to _not_ returning game log
@@ -140,18 +142,17 @@ function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
         debug && log.push('=========');
     }
 
-    var return_val;
     if (!lost_at_game) {
         debug && log.push('You Win!');
-        return_val = { result: true };
     } else {
         debug && log.push('You Lose!');
-        return_val = { result: false };
     }
 
-    if (debug) {
-        return_val.log = log.join(log_joiner);
-    }
+    var return_val = {
+        result: !lost_at_game,
+        turns: original_deck_length - cards.length,
+        log: log.join(log_joiner)
+    };
 
     return return_val;
 }
