@@ -55,13 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var highest = document.getElementById('highest-card');
 
     // Wait 500ms, and simulate our game a million times
-    var calculateChanceOfWinning = function() {
+    var calculateChanceOfWinning = function(force_lowest, force_highest) {
         var SIMULATIONS = 1000000;
 
         console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
 
-        var lowest_value = parseInt(lowest.value);
-        var highest_value = parseInt(highest.value);
+        var lowest_value = force_lowest || parseInt(lowest.value);
+        var highest_value = force_highest || parseInt(highest.value);
 
         var WON_GAME = 0;
         for (var i = 0; i < SIMULATIONS; i++) {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('complete-result').innerHTML = complete_results_string;
     }
-    setTimeout(calculateChanceOfWinning, 500);
+    setTimeout(function() { calculateChanceOfWinning(2, 10) }, 500);
 
     document.getElementById('get-percentage-chance').addEventListener('click', function(e) {
         document.getElementById('complete-result').innerHTML =
