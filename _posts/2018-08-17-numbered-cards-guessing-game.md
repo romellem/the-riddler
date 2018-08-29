@@ -21,7 +21,14 @@ title: Numbered Cards Guessing Game
 
 ---
 
-### Card Values
+## Answer
+
+After running a simulation millions of times, the probability of "winning"
+with a deck of cards 2 through 10 is:
+
+**\~17%**.
+
+### Calculate Chance of Winning with a Certain Deck
 
 Lowest Card:
 <input type="number" id="lowest-card" name="lowest-card"
@@ -38,21 +45,11 @@ _Simulations_:
 
 <button id="get-percentage-chance">Calculate chance of winning game with above deck</button>
 
-## Solution
-
-After running a simulation millions of times, the probability of "winning"
-with a deck of cards 2 through 10 is:
-
-**\~17%**.
-
-To see the results yourself, click the _Calculate chance of winning game_ button
-above.
-
 <p id="complete-result">Running with deck of 2 - 10...</p>
 
-## Simulate a Game
+### Simulate a Single Game with Above Deck
 
-<button id="simulate">Simulate one game</button>
+<button id="simulate">Simulate one game with above deck</button>
 <h2 id="result"></h2>
 <pre id="log" style="display: none"></pre>
 
