@@ -29,3 +29,21 @@ title: How Many Hoops Will Kids Jump Through To Play Rock, Paper, Scissors?
 > To get you started, here’s how a single game might unfold:
 >
 > ![Example Game Simulation]({{ "/assets/images/RockPaperScissorsHop.gif" | absolute_url }})
+
+---
+
+<div id="game"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.2/umd/react.production.min.js" integrity="sha256-2EQx5J1ux3sjgPLtDevlo449XNXfvEplcRYWIF6ui8w=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.2/umd/react-dom-server.browser.production.min.js" integrity="sha256-SeXw4UtcyQxfjpiUMA+bMBebsqpDUMDuIDFQfsvKp/U=" crossorigin="anonymous"></script>
+
+<script>
+    // Load in `Game` component
+    {% include 2018-08-24-how-many-hoops-will-kids-jump-through-to-play-rock-paper-scissors.js %}
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('game');
+        ReactDOM.render(React.createElement(Game), container);
+    });
+</script>
+
