@@ -28,4 +28,4 @@ title: How Many Hoops Will Kids Jump Through To Play Rock, Paper, Scissors?
 >
 > To get you started, here’s how a single game might unfold:
 >
-> ![Example Game Simulation]({{ "/assets/RockPaperScissorsHop.gif" | absolute_url }})
+> ![Example Game Simulation]({{ "/assets/images/RockPaperScissorsHop.gif" | absolute_url }})
