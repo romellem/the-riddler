@@ -12,7 +12,7 @@ const Board = (props = {}) => {
     let { hoops, playerAPosition, playerBPosition } = props;
     return e(
         'ul',
-        { className: 'board'},
+        { className: 'board' },
         Array(hoops).fill().map((s, i) => {
             return e(
                 'li',
@@ -218,12 +218,13 @@ class Game extends React.Component {
             ),
             e(Board, { hoops, playerAPosition, playerBPosition }),
             this.state.result && e('h3', null, `${this.state.result} won the game!`),
-            this.state.result &&
-                e(
-                    'button',
-                    { onClick: () => this.beginSimulation(true) },
-                    'Begin Another Simulation'
-                )
+            this.state.result
+                ? e(
+                      'button',
+                      { onClick: () => this.beginSimulation(true) },
+                      'Begin Another Simulation'
+                  )
+                : e('br', null, e('br'), e('br'))
         );
     }
 }
