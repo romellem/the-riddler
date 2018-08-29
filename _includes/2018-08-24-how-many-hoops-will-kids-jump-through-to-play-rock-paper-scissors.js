@@ -224,7 +224,7 @@ class Game extends React.Component {
                       { onClick: () => this.beginSimulation(true) },
                       'Begin Another Simulation'
                   )
-                : e('br', null, e('br'), e('br'))
+                : e('div', null, e('br'), e('br'), e('br'))
         );
     }
 }
