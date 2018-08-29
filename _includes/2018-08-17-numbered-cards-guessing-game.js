@@ -48,44 +48,35 @@ function countRemainingCardsHigherOrLower(array, num) {
     return { higher: higher, lower: lower };
 }
 
-var deck_cache = {};
 
 /**
  * @returns Object - return 'result' (bool if you won or not)
  *                   and optionaly 'log' (string representation of the game)
  */
 function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
-    var deck;
-    if (deck_cache[lowest_card + ',' + highest_card]) {
-        // Get copy of array
-        deck = deck_cache[lowest_card + ',' + highest_card].slice(0);
-    } else {
-        // Build our deck and cache it for copying later
-        deck = [];
+    var deck = Array.isArray(lowest_card) ? lowest_card : [];
+    if (deck.length === 0) {
         for (var c = lowest_card; c <= highest_card; c++) {
             deck.push(c);
         }
-
-        deck_cache[lowest_card + ',' + highest_card] = deck.slice(0);
     }
 
     var original_deck_length = deck.length;
-    
 
-    // Defaults to _not_ returning game log
-    debug = typeof debug === 'undefined' ? false : true;
+    // Defaults to returning game log
+    debug = typeof debug === 'undefined' ? true : false;
 
     // Joins log with new lines
     log_joiner = typeof log_joiner === 'undefined' ? '\n' : log_joiner;
 
     var log = [];
 
-    var cards = shuffle(deck);
+    var cards = Array.isArray(lowest_card) ? deck.slice(0) : shuffle(deck);
+    var original_cards = cards.toString();
 
     // Pick first card
     var number_card_picked = 1;
-    var card_index = getRandomInt(0, cards.length);
-    var card = cards.splice(card_index, 1)[0];
+    var card = cards.pop();
 
     debug && log.push('=== ' + number_card_picked + ' ===');
     debug && log.push('\tFirst card is ' + card);
@@ -111,14 +102,13 @@ function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
         } else {
             chance = 50;
             debug && log.push('\t' + '50 / 50 change it is higher or lower');
-            choice = Math.random() < 0.5 ? 'HIGHER' : 'LOWER';
+            choice = 'HIGHER'; //Math.random() < 0.5 ? 'HIGHER' : 'LOWER';
         }
 
         debug && log.push('\t' + 'I am picking: ' + choice);
 
         // Pick another card
-        var card_index = getRandomInt(0, cards.length);
-        var card = cards.splice(card_index, 1)[0];
+        var card = cards.pop();
 
         debug && log.push('\t' + 'Picked ' + card);
         if (choice === 'HIGHER') {
@@ -151,22 +141,49 @@ function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
     var return_val = {
         result: !lost_at_game,
         turns: original_deck_length - cards.length,
-        log: log.join(log_joiner)
+        log: log.join(log_joiner),
+        deck: original_cards,
     };
 
     return return_val;
 }
 
-/*
 // To simulate a lot of games, run the following
 
-var SIMULATIONS = 1000000;
+let attempt = [
+    89,86,16,87,54,90,91,60,88,68,
+    41,11,8,81,43,23,77,67,51,47,97,
+    15,12,72,44,39,28,95,50,56,53,32,
+    13,85,18,5,3,55,71,42,26,21,74,
+    36,84,100,4,58,82,10,62,19,57,40,
+    64,48,29,61,76,46,65,7,63,22,75,
+    20,92,49,93,33,66,52,70,45,83,27,
+    96,35,2,79,94,24,17,73,34,59,14,9,
+    78,99,25,80,38,31,69,37,6,98,30
+];
+var game = simulateGuessingGame(attempt);
+console.log(game.log)
 
-console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
+/*
+var SIMULATIONS = 5000000;
+var LOWEST = 2;
+var HIGHEST = 10;
+
+console.log(
+    'Running ' +
+        SIMULATIONS.toLocaleString() +
+        ' times with deck ' +
+        LOWEST +
+        ' - ' +
+        HIGHEST +
+        '...\n---------\n\n'
+);
 
 var WON_GAME = 0;
 for (var i = 0; i < SIMULATIONS; i++) {
-    if (simulateGuessingGame(2, 10).result) {
+    var game = simulateGuessingGame(LOWEST, HIGHEST, false);
+    if (game.result) {
+        // console.log(game.log);
         WON_GAME++;
     }
 }
@@ -180,5 +197,30 @@ console.log(
         (WON_GAME / SIMULATIONS) * 100 +
         '%)'
 );
-
 */
+
+// var LOWEST = 2;
+// var HIGHEST = 100;
+
+// console.log('Running with deck ' + LOWEST + ' - ' + HIGHEST + ' until we win...\n---------\n\n');
+
+// var CURRENT_SIMULATIONS = 0;
+// var BEST_TURNS = 0;
+// while (true) {
+//     const game = simulateGuessingGame(LOWEST, HIGHEST);
+//     ++CURRENT_SIMULATIONS;
+//     if (CURRENT_SIMULATIONS % 25000000 === 0) {
+//         console.log(new Date() + ' ' + CURRENT_SIMULATIONS.toLocaleString() + ' simultations so far...');
+//     }
+//     if (game.turns > BEST_TURNS) {
+//         console.log(new Date() + ' Best Turns: ' + BEST_TURNS);
+//         console.log('Made with: [' + game.deck + ']');
+//         BEST_TURNS = game.turns;
+//     }
+//     if (game.result) {
+//         console.log('WE WON!!!!!');
+//         console.log('It only took ' + CURRENT_SIMULATIONS.toLocaleString() + ' simulations!\n');
+//         console.log(game.log);
+//         break;
+//     }
+// }
