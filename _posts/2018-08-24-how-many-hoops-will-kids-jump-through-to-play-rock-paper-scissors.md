@@ -35,7 +35,7 @@ title: How Many Hoops Will Kids Jump Through To Play Rock, Paper, Scissors?
 <div id="game"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.2/umd/react.production.min.js" integrity="sha256-2EQx5J1ux3sjgPLtDevlo449XNXfvEplcRYWIF6ui8w=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.2/umd/react-dom-server.browser.production.min.js" integrity="sha256-SeXw4UtcyQxfjpiUMA+bMBebsqpDUMDuIDFQfsvKp/U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.2/umd/react-dom.production.min.js" integrity="sha256-3NNU/yoE0R7VxxapKiw/hkgQzcSMztyclb5RpeVlV7Y=" crossorigin="anonymous"></script>
 
 <script>
     // Load in `Game` component
