@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (game.result) {
             result.style.color = 'green';
-            result.innerHTML = 'You Won!';
+            result.innerHTML = 'You Won! You played all ' + game.turns + ' cards within the deck!';
         } else {
             result.style.color = 'red';
             result.innerHTML = 'You Lost! (Played ' + game.turns + ' turns before you lost)';
