@@ -75,7 +75,7 @@ class Game extends React.Component {
     }
 
     playRoundOfRockPaperScissors() {
-        return Math.random() < 0.5 ? 'A' : 'B';
+        // return Math.random() < 0.5 ? 'A' : 'B';
 
         let a_choice = this.getRandomInt();
         let b_choice = this.getRandomInt();
