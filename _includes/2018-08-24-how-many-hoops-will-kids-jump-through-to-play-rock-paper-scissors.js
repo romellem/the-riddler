@@ -47,6 +47,7 @@ class Game extends React.Component {
         //     return 'You liked this.';
         // }
 
-        return e(Board);
+        let { hoops, playerAPosition, playerBPosition } = this.state;
+        return e(Board, { hoops, playerAPosition, playerBPosition });
     }
 }
