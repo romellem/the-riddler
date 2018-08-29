@@ -40,6 +40,14 @@ _Simulations_:
 
 ## Solution
 
+After running a simulation millions of times, the probability of "winning"
+with a deck of cards 2 through 10 is:
+
+**\~17%**.
+
+To see the results yourself, click the _Calculate chance of winning game_ button
+above.
+
 <p id="complete-result">Running with deck of 2 - 10...</p>
 
 ## Simulate a Game
