@@ -56,18 +56,18 @@ var deck_cache = {};
  */
 function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
     var deck;
-    if (deck_cache[lowest_card + ',' + highest_card]) {
-        // Get copy of array
-        deck = deck_cache[lowest_card + ',' + highest_card].slice(0);
-    } else {
-        // Build our deck and cache it for copying later
+    // if (deck_cache[lowest_card + ',' + highest_card]) {
+    //     // Get copy of array
+    //     deck = deck_cache[lowest_card + ',' + highest_card].slice(0);
+    // } else {
+    //     // Build our deck and cache it for copying later
         deck = [];
         for (var c = lowest_card; c <= highest_card; c++) {
             deck.push(c);
         }
 
-        deck_cache[lowest_card + ',' + highest_card] = deck.slice(0);
-    }
+    //     deck_cache[lowest_card + ',' + highest_card] = deck.slice(0);
+    // }
 
     var original_deck_length = deck.length;
     
@@ -80,7 +80,8 @@ function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
 
     var log = [];
 
-    var cards = shuffle(deck);
+    // var cards = shuffle(deck);
+    var cards = deck;
 
     // Pick first card
     var number_card_picked = 1;
@@ -157,10 +158,10 @@ function simulateGuessingGame(lowest_card, highest_card, debug, log_joiner) {
     return return_val;
 }
 
-/*
-// To simulate a lot of games, run the following
 
-var SIMULATIONS = 1000000;
+// To simulate a lot of games, run the following
+/*
+var SIMULATIONS = 10000000;
 
 console.log('Running ' + SIMULATIONS.toLocaleString() + ' times...\n---------\n\n');
 
@@ -179,6 +180,5 @@ console.log(
         ' (' +
         (WON_GAME / SIMULATIONS) * 100 +
         '%)'
-);
-
+)
 */
