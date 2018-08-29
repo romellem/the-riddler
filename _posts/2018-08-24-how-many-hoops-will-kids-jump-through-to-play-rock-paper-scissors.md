@@ -77,7 +77,7 @@ li.board__hoop:last-child {
 
     document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('game');
-        ReactDOM.render(React.createElement(Game), container);
+        ReactDOM.render(React.createElement(Game, { hoops: 8 }), container);
     });
 </script>
 

@@ -34,7 +34,7 @@ class Game extends React.Component {
     constructor(props = {}) {
         super(props);
 
-        let { hoops = 11 } = props;
+        let { hoops = 10 } = props;
 
         this.initial_state = {
             hoops,
@@ -190,10 +190,10 @@ class Game extends React.Component {
     beginSimulation(reset_state = false) {
         if (reset_state) {
             this.setState(this.initial_state, () => {
-                this.gameInterval = setInterval(() => this.playRoundOfGame(), 250);
+                this.gameInterval = setInterval(() => this.playRoundOfGame(), 200);
             });
         } else {
-            this.gameInterval = setInterval(() => this.playRoundOfGame(), 250);
+            this.gameInterval = setInterval(() => this.playRoundOfGame(), 200);
         }
     }
 
