@@ -90,7 +90,7 @@ const runStrategyAndUpdateResults = (strategy, num_of_simulations = 1000000, cal
 };
 
 let strategies_names = Object.keys(STRATEGIES);
-let results = document.getElementById('results');
+let results = document.getElementById('game');
 const runStrategiesOnTimer = () => {
     let current_strategy = strategies_names.shift();
     if (current_strategy) {

@@ -29,7 +29,7 @@ title: I’d Like To Use My Riddler Lifeline
 
 ## Results
 
-<div id="results">Running...</div>
+<div id="game">Running...</div>
 
 <script>
     // Load in `Game` component
