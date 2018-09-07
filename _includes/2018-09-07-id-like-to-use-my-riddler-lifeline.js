@@ -23,6 +23,12 @@ const STRATEGIES = {
                         top response. If you get it correct, walk.`,
         average: undefined,
     },
+
+    GUESS_ON_FIRST_THEN_USE_BOTH_LIFELINES_ON_LAST: {
+        description: `Guess on the first question, then use both the 50/50 lifeline and
+                        Ask the Audience and select their top response.`,
+        average: undefined,
+    },
 };
 
 const runStrategyAndUpdateResults = (strategy, num_of_simulations = 1000000, callback) => {
@@ -71,6 +77,25 @@ const runStrategyAndUpdateResults = (strategy, num_of_simulations = 1000000, cal
 
                 if (first_question) {
                     results.push(500000);
+                } else {
+                    // You lost
+                    results.push(10000);
+                }
+                break;
+
+            case 'GUESS_ON_FIRST_THEN_USE_BOTH_LIFELINES_ON_LAST':
+                first_question = Math.random() < 0.25;
+                if (first_question) {
+                    // Got first question, use both lifelines on final question
+                    second_question = Math.random() < 0.65;
+
+                    if (second_question) {
+                        // You lost
+                        results.push(1000000);
+                    } else {
+                        // You lost
+                        results.push(10000);
+                    }
                 } else {
                     // You lost
                     results.push(10000);
