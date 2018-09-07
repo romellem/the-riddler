@@ -127,7 +127,7 @@ const runStrategiesOnTimer = () => {
                     let { description, average } = STRATEGIES[current_strategy];
 
                     let li = document.createElement('li');
-                    li.innerHTML = `<b>Description</b>: ${description}<br><b>Average</b>: ${average.toLocaleString()}`;
+                    li.innerHTML = `<b>Description</b>: ${description}<br><b>Average</b>: $${average.toLocaleString()}`;
 
                     ul.appendChild(li);
                     runStrategiesOnTimer();
@@ -148,7 +148,7 @@ const runEntireSimulation = () => {
         let { description, average } = STRATEGIES.IMMEDIATE_WALK;
         results.innerHTML = `
             <ul id="list">
-                <li><b>Description</b>: ${description}<br><b>Average</b>: ${average.toLocaleString()}</li>
+                <li><b>Description</b>: ${description}<br><b>Average</b>: $${average.toLocaleString()}</li>
             </ul>
         `;
 
