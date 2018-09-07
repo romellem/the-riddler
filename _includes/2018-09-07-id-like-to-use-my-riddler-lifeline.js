@@ -20,7 +20,7 @@ const STRATEGIES = {
 
     FIFTY_FIFTY_AND_ASK_AUDIENCE_ON_FIRST: {
         description: `Use the 50/50 lifeline, then use Ask the Audience and select their
-                        top response.`,
+                        top response. If you get it correct, walk.`,
         average: undefined,
     },
 };
