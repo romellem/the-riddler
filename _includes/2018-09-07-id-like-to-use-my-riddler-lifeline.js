@@ -33,9 +33,10 @@ const runStrategyAndUpdateResults = (strategy, num_of_simulations = 1000000, cal
     }
 
     for (let i = 0; i < num_of_simulations; i++) {
+        let first_question, second_question;
         switch (strategy) {
             case 'FIFTY_FIFTY_THEN_WALK':
-                let first_question = Math.random() < 0.5;
+                first_question = Math.random() < 0.5;
 
                 if (first_question) {
                     results.push(500000);
@@ -46,11 +47,11 @@ const runStrategyAndUpdateResults = (strategy, num_of_simulations = 1000000, cal
                 break;
 
             case 'FIFTY_FIFTY_FIRST_AUDIENCE_SECOND':
-                let first_question = Math.random() < 0.5;
+                first_question = Math.random() < 0.5;
 
                 if (first_question) {
                     // Got first question, ask audience for second question (which is essentially another coin flip)
-                    let second_question = Math.random() < 0.5;
+                    second_question = Math.random() < 0.5;
 
                     if (second_question) {
                         // You lost
@@ -66,7 +67,7 @@ const runStrategyAndUpdateResults = (strategy, num_of_simulations = 1000000, cal
                 break;
 
             case 'FIFTY_FIFTY_AND_ASK_AUDIENCE_ON_FIRST':
-                let first_question = Math.random() < 0.65;
+                first_question = Math.random() < 0.65;
 
                 if (first_question) {
                     results.push(500000);
@@ -82,7 +83,10 @@ const runStrategyAndUpdateResults = (strategy, num_of_simulations = 1000000, cal
 
     // Updates average
     STRATEGIES[strategy].average = results.reduce((a, b) => a + b, 0) / results.length;
-    return STRATEGIES[strategy].average;
+
+    if (callback) {
+        callback();
+    }
 };
 
 let strategies_names = Object.keys(STRATEGIES);
@@ -90,16 +94,21 @@ let results = document.getElementById('results');
 const runStrategiesOnTimer = () => {
     let current_strategy = strategies_names.shift();
     if (current_strategy) {
-        setTimeout(() => runStrategyAndUpdateResults(current_strategy, undefined, () => {
-            // UL element is inserted into the DOM prio to this running (fragile)
-            let ul = document.getElementById('list');
-            let { description, average } = STRATEGIES[current_strategy];
-            
-            let li = document.createElement('li');
-            li.innerHTML = `Description:${description}<br>Average: ${average}`;
+        setTimeout(
+            () =>
+                runStrategyAndUpdateResults(current_strategy, undefined, () => {
+                    // UL element is inserted into the DOM prio to this running (fragile)
+                    let ul = document.getElementById('list');
+                    let { description, average } = STRATEGIES[current_strategy];
 
-            ul.appendChild(li);
-        }), 1000);
+                    let li = document.createElement('li');
+                    li.innerHTML = `<b>Description</b>: ${description}<br><b>Average</b>: ${average}`;
+
+                    ul.appendChild(li);
+                    runStrategiesOnTimer();
+                }),
+            1000
+        );
     } else {
         let done_element = document.createElement('h5');
         done_element.style.color = 'green';
@@ -114,7 +123,7 @@ const runEntireSimulation = () => {
         let { description, average } = STRATEGIES.IMMEDIATE_WALK;
         results.innerHTML = `
             <ul id="list">
-                <li>Description:${description}<br>Average: ${average}</li>
+                <li><b>Description</b>: ${description}<br><b>Average</b>: ${average}</li>
             </ul>
         `;
 
@@ -124,4 +133,4 @@ const runEntireSimulation = () => {
         // Kick off remaining tests!
         runStrategiesOnTimer();
     }, 500);
-}
+};
