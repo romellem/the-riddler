@@ -40,16 +40,32 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
     {% include 2018-10-26-who-will-capture-the-most-james-bonds.js %}
 
     document.addEventListener('DOMContentLoaded', function() {
-        const SIMULATIONS = 100000;
-        let wins = 0;
-        for (let i = 0; i < SIMULATIONS; i++) {
-            if (dealHandAndSeeIfSolvable(6)) {
-                wins++;
+        setTimeout(function() {
+            const SIMULATIONS = 100000;
+            let wins = 0;
+            for (let i = 0; i < SIMULATIONS; i++) {
+                if (dealHandAndSeeIfSolvable(6)) {
+                    wins++;
+                }
             }
-        }
 
-        let game = document.getElementById('game');
+            let game = document.getElementById('game');
 
-        game.innerHTML = `${wins} / ${SIMULATIONS} = ${Math.round(wins / SIMULATIONS * 100)}%`;
+            game.innerHTML = `${wins} / ${SIMULATIONS} = ${Math.round(wins / SIMULATIONS * 100)}%`;
+
+            // Get sample winning game
+            var log_str;
+            var record_log = str => {
+                log_str += '<li>' + str + '</li>';
+            };
+            do {
+                log_str = '';
+                var result = dealHandAndSeeIfSolvable(6, record_log);
+            } while (!result)
+
+            game.innerHTML += '<ul>' + log_str + '</ul>'
+            
+        }, 100)
+        
     });
 </script>

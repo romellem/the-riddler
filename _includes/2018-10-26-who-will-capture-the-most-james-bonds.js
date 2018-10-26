@@ -139,18 +139,18 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
                 let new_hand_passed = testIfHandPassesSortingRequirments(new_hand);
 
                 if (new_hand_passed) {
-                    if (log) {
-                        console.log('YES - Hand can be solved!');
-                        console.log(`\tHand: ${hand.join(',')}`);
-                        console.log(
+                    if (typeof log === 'function') {
+                        log('YES - Hand can be solved!');
+                        log(`\tHand: ${hand.join(',')}`);
+                        log(
                             `\tGroup: ${group_to_move.join(
                                 ','
                             )} (${bunch_size} cards at position ${i})`
                         );
-                        console.log(
+                        log(
                             `\tInsert at ${j} of remaining cards (${remaining_hand.join(',')})`
                         );
-                        console.log(`\tSolved hand: ${new_hand.join(',')}`);
+                        log(`\tSolved hand: ${new_hand.join(',')}`);
                     }
                     return true;
                 }
@@ -159,9 +159,9 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
     }
 
     // If we are here, we failed
-    if (log) {
-        console.log('NO  - Hand CANNOT be solved');
-        console.log(`\tHand: ${hand.join(',')}`);
+    if (typeof log === 'function') {
+        log('NO  - Hand CANNOT be solved');
+        log(`\tHand: ${hand.join(',')}`);
     }
     return false;
 }
