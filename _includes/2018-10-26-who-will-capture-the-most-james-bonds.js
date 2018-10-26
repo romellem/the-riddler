@@ -131,12 +131,9 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
         for (let i = 0; i < hand.length - bunch_size + 1; i++) {
             let remaining_hand = hand.slice(0);
             let group_to_move = remaining_hand.splice(i, bunch_size);
-            // let remaining_hand = [...hand.slice(0, i), ...hand.slice(i + 1)];
-            // let remaining_hand = hand.filter(c => !group_to_move.includes(c));
 
             // Try to insert `group_to_move` at different spots in `remaining_hand`
             for (let j = 0; j < remaining_hand.length + 1; j++) {
-                // debugger;
                 let new_hand = remaining_hand.slice(0);
                 new_hand.splice(j, 0, ...group_to_move);
                 let new_hand_passed = testIfHandPassesSortingRequirments(new_hand);
@@ -169,51 +166,4 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
     return false;
 }
 
-function checkHand(hand) {
-    console.log(hand.join(', ') + ' - ' + testIfHandPassesSortingRequirments(hand));
-}
 
-// '♠', '♥', '♣', '♦',
-//
-
-// All same suit
-// checkHand(['♠','♠','♠','♠','♠','♠'])
-// checkHand(['♥','♥','♥','♥','♥','♥'])
-// checkHand(['♣','♣','♣','♣','♣','♣'])
-// checkHand(['♦','♦','♦','♦','♦','♦'])
-
-// // Two suits, alternate colors
-// checkHand(['♠','♠','♠','♥','♥','♥'])
-// checkHand(['♥','♥','♥','♠','♠','♠'])
-// checkHand(['♣','♣','♣','♦','♦','♦'])
-// checkHand(['♦','♦','♦','♣','♣','♣'])
-
-// // Two suits, same color
-// checkHand(['♠','♠','♠','♣','♣','♣'])
-// checkHand(['♥','♥','♥','♦','♦','♦'])
-
-// // Three suits
-// checkHand(['♠','♠','♦','♦','♣','♣'])
-// checkHand(['♥','♥','♣','♣','♦','♦'])
-
-// // Four suits
-// checkHand(['♠','♠','♦','♣','♣','♥'])
-// checkHand(['♥','♥','♣','♦','♦','♠'])
-
-// // Others, these should all fail!
-// checkHand(['♠','♠','♣','♣','♥','♥'])
-// checkHand(['♠','♠','♣','♦','♥','♥'])
-// checkHand(['♠','♥','♣','♦','♦','♠'])
-// checkHand(['♠','♥','♦','♦','♦','♦'])
-// checkHand(['♠','♥','♦','♣','♥','♠'])
-
-
-const SIMULATIONS = 100000;
-let wins = 0;
-for (let i = 0; i < SIMULATIONS; i++) {
-    if (dealHandAndSeeIfSolvable(6)) {
-        wins++;
-    }
-}
-
-console.log(`${wins} / ${SIMULATIONS} = ${Math.round(wins / SIMULATIONS * 100)}%`)
