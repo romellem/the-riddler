@@ -36,7 +36,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
 <div id="game">Running...</div>
 
-<button id="get-sample" style="display: none">Deal out random hand and test if "solvable"</button>
+<button id="get-sample" style="display: none">Deal out random hand</button>
 <div id="sample-hand"></div>
 
 <style>
@@ -71,7 +71,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
         })
 
         setTimeout(function() {
-            const SIMULATIONS = 100000;
+            const SIMULATIONS = 10000;
             let wins = 0;
             for (let i = 0; i < SIMULATIONS; i++) {
                 if (dealHandAndSeeIfSolvable(6)) {
@@ -81,7 +81,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
             let game = document.getElementById('game');
 
-            game.innerHTML = `${wins} / ${SIMULATIONS} = ${Math.round(wins / SIMULATIONS * 100)}%`;
+            game.innerHTML = `${wins} / ${SIMULATIONS} ≈ ${Math.round(wins / SIMULATIONS * 100)}% a 6-card hand is "solvable"`;
 
             outputSampleHand(true);
             
