@@ -38,6 +38,12 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
 <button id="get-sample" style="display: none">Deal out random hand and test if "solvable"</button>
 <div id="sample-hand"></div>
+
+<style>
+.red {
+    color: red;
+}
+</style>
     
 <script>
     {% include 2018-10-26-who-will-capture-the-most-james-bonds.js %}
@@ -46,6 +52,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
     document.addEventListener('DOMContentLoaded', function() {
         let sample_hand = document.getElementById('sample-hand');
+        let sample_hand_button = document.getElementById('get-sample');
         function outputSampleHand(force_winning = false) {
             var log_str;
             var record_log = str => {
@@ -59,7 +66,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
             sample_hand.innerHTML = '<ul>' + log_str + '</ul>'
         }
 
-        sample_hand.addEventListener('click', function(e) {
+        sample_hand_button.addEventListener('click', function(e) {
             outputSampleHand();
         })
 
@@ -79,7 +86,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
             outputSampleHand(true);
             
             // Display button
-            sample_hand.style.display = null;
+            sample_hand_button.style.display = null;
             
         }, 100)
 
