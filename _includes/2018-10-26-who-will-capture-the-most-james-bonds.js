@@ -10,6 +10,12 @@ const SUIT_COLORS = {
     '♣': 'B',
     '♦': 'R'
 };
+const S_HTML = {
+    '♠': '<span>♠</span>',
+    '♥': '<span class="red">♥</span>',
+    '♣': '<span>♣</span>',
+    '♦': '<span class="red">♦</span>'
+};
 deck_suits.forEach(suit => {
     deck_nums.forEach(card => {
         // Just add "suit" for now, since number doesn't matter
@@ -140,17 +146,17 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
 
                 if (new_hand_passed) {
                     if (typeof log === 'function') {
-                        log('YES - Hand can be solved!');
-                        log(`\tHand: ${hand.join(',')}`);
+                        log('<strong>Hand CAN be solved</strong>');
+                        log(`\tHand: ${hand.map(c => S_HTML[c]).join(', ')}`);
                         log(
-                            `\tGroup: ${group_to_move.join(
-                                ','
+                            `\tGroup: ${group_to_move.map(c => S_HTML[c]).join(
+                                ', '
                             )} (${bunch_size} cards at position ${i})`
                         );
                         log(
-                            `\tInsert at ${j} of remaining cards (${remaining_hand.join(',')})`
+                            `\tInsert at ${j} of remaining cards (${remaining_hand.map(c => S_HTML[c]).join(', ')})`
                         );
-                        log(`\tSolved hand: ${new_hand.join(',')}`);
+                        log(`\tSolved hand: ${new_hand.map(c => S_HTML[c]).join(',')}`);
                     }
                     return true;
                 }
@@ -160,8 +166,8 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
 
     // If we are here, we failed
     if (typeof log === 'function') {
-        log('NO  - Hand CANNOT be solved');
-        log(`\tHand: ${hand.join(',')}`);
+        log('<strong>Hand CANNOT be solved</strong>');
+        log(`\tHand: ${hand.map(c => S_HTML[c]).join(',')}`);
     }
     return false;
 }

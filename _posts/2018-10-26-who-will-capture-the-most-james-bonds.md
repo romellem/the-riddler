@@ -36,10 +36,33 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
 <div id="game">Running...</div>
 
+<button id="get-sample" style="display: none">Deal out random hand and test if "solvable"</button>
+<div id="sample-hand"></div>
+    
 <script>
     {% include 2018-10-26-who-will-capture-the-most-james-bonds.js %}
 
+    
+
     document.addEventListener('DOMContentLoaded', function() {
+        let sample_hand = document.getElementById('sample-hand');
+        function outputSampleHand(force_winning = false) {
+            var log_str;
+            var record_log = str => {
+                log_str += '<li>' + str + '</li>';
+            };
+            do {
+                log_str = '';
+                var result = dealHandAndSeeIfSolvable(6, record_log);
+            } while (result && force_winning);
+
+            sample_hand.innerHTML = '<ul>' + log_str + '</ul>'
+        }
+
+        sample_hand.addEventListener('click', function(e) {
+            outputSampleHand();
+        })
+
         setTimeout(function() {
             const SIMULATIONS = 100000;
             let wins = 0;
@@ -53,19 +76,13 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
             game.innerHTML = `${wins} / ${SIMULATIONS} = ${Math.round(wins / SIMULATIONS * 100)}%`;
 
-            // Get sample winning game
-            var log_str;
-            var record_log = str => {
-                log_str += '<li>' + str + '</li>';
-            };
-            do {
-                log_str = '';
-                var result = dealHandAndSeeIfSolvable(6, record_log);
-            } while (!result)
-
-            game.innerHTML += '<ul>' + log_str + '</ul>'
+            outputSampleHand(true);
+            
+            // Display button
+            sample_hand.style.display = null;
             
         }, 100)
-        
+
+
     });
 </script>
