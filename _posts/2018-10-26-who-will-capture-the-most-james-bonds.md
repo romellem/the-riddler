@@ -37,6 +37,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 <div id="game">Running...</div>
 
 <button id="get-sample" style="display: none">Deal out random hand</button>
+<br><input type="number" id="num" style="display: none" min="2" value="6" />
 <div id="sample-hand"></div>
 
 <style>
@@ -53,14 +54,20 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
     document.addEventListener('DOMContentLoaded', function() {
         let sample_hand = document.getElementById('sample-hand');
         let sample_hand_button = document.getElementById('get-sample');
+        let num_input = document.getElementById('num');
         function outputSampleHand(force_winning = false) {
             var log_str;
             var record_log = str => {
                 log_str += '<li>' + str + '</li>';
             };
+            
+            let num = parseInt(num_input.value, 10);
+            if (isNaN(num) || num < 1) {
+              num = 2;
+            }
             do {
                 log_str = '';
-                var result = dealHandAndSeeIfSolvable(6, record_log);
+                var result = dealHandAndSeeIfSolvable(num, record_log);
             } while (result && force_winning);
 
             sample_hand.innerHTML = '<ul>' + log_str + '</ul>'
@@ -87,8 +94,9 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
             
             // Display button
             sample_hand_button.style.display = null;
+            num_input.style.display = null;
             
-        }, 100)
+        }, 200)
 
 
     });
