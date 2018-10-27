@@ -37,6 +37,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 <div id="game">Running...</div>
 
 <button id="get-sample" style="display: none">Deal out random hand</button>
+<br>
 <button id="get-winning" style="display: none">Deal out winning hand</button>
 <br><input type="number" id="num" style="display: none" min="2" value="6" />
 <div id="sample-hand"></div>
@@ -70,7 +71,7 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
             do {
                 log_str = '';
                 var result = dealHandAndSeeIfSolvable(num, record_log);
-            } while (result && force_winning);
+            } while (!result && force_winning);
 
             sample_hand.innerHTML = '<ul>' + log_str + '</ul>'
         }
