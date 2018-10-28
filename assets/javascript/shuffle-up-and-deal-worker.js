@@ -174,7 +174,7 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
     return false;
 }
 
-function simulateOddsOfWinningWithHandSize(hand_size, total_simulations = 100000) {
+function simulateOddsOfWinningWithHandSize(hand_size, total_simulations = 20000) {
     if (hand_size < 0) {
         hand_size = 1;
     }
