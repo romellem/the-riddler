@@ -42,15 +42,15 @@ title: Shuffle Up and Deal - Riddler Classic
 <button id="get-winning" style="display: none">Deal out winning hand</button>
 <br><input type="number" id="num" style="display: none" min="2" value="6" />
 <div id="sample-hand"></div>
+<div id="container" style="width: 75%;">
+    <canvas id="canvas"></canvas>
+</div>
 
-<style>
-.red {
-    color: red;
-}
-</style>
-    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('canvas').getContext('2d');
         let odds_results_list = document.getElementById('odds-results');
         let running_status = document.getElementById('running-status');
 
@@ -63,6 +63,9 @@ title: Shuffle Up and Deal - Riddler Classic
         var worker = new Worker('{{ "assets/javascript/shuffle-up-and-deal-worker.js" | relative_url }}');
 
         let hand_sizes = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+        let hand_size_labels = hand_sizes.slice(0).map(String);
+        hand_size_labels.reverse();
+
         let current_hand_size = hand_sizes.pop();
 
         running_status.innerHTML = `Calculating hand size of ${current_hand_size}`;
@@ -71,13 +74,38 @@ title: Shuffle Up and Deal - Riddler Classic
             handSize: current_hand_size,
         });
 
+        // Bar Chart data
+        var barChartData = {
+            labels: hand_size_labels,
+            datasets: [{
+                label: 'Results',
+                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: []
+            }]
+        };
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                // legend: false,
+                // title: false
+            }
+        });
+
 
         worker.onmessage = function (event) {
             let data = event.data;
             switch (data && data.type) {
                 case 'calculate-odds':
-                    appendOddsResult(`Hand of ${data.handSize} cards - ${parseFloat((data.odds * 100).toFixed(2))}% chance your dealt hand is "solvable"`)
+                    let odds_percent = parseFloat((data.odds * 100).toFixed(2));
+                    appendOddsResult(`Hand of ${data.handSize} cards - ${odds_percent}% chance your dealt hand is "solvable"`)
 
+                    // Adds result to graph
+                    barChartData.datasets[0].push(odds_percent);
+                    window.myBar.update();
                     break;
             }
 
@@ -154,3 +182,13 @@ title: Shuffle Up and Deal - Riddler Classic
     });
     */
 </script>
+<style>
+.red {
+    color: red;
+}
+canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+</style>
