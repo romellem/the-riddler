@@ -120,7 +120,7 @@ title: Shuffle Up and Deal - Riddler Classic
                             beginAtZero:true
                         }
                     }]
-                }
+                },
                 legend: false,
                 title: false
             }
