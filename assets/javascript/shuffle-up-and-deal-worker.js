@@ -115,10 +115,12 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
     // This isn't clear in the rules, but if the original
     // hand is already sorted, then return true
     if (testIfHandPassesSortingRequirments(hand)) {
-        log('<strong>Hand was dealt ALREADY SOLVED</strong>');
-        log(`\tOriginal Hand: ${hand.map(c => S_HTML[c]).join(', ')}`);
-        log(` `);
-        log(` `);
+        if (typeof log === 'function') {
+            log('<strong>Hand was dealt ALREADY SOLVED</strong>');
+            log(`\tOriginal Hand: ${hand.map(c => S_HTML[c]).join(', ')}`);
+            log(` `);
+            log(` `);
+        }
         return true;
     }
 
