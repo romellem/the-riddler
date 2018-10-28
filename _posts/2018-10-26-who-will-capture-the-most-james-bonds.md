@@ -89,17 +89,36 @@ title: Shuffle Up and Deal - Riddler Classic
             labels: hand_size_labels,
             datasets: [{
                 label: 'Results',
-                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-                borderColor: window.chartColors.red,
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
                 borderWidth: 1,
                 data: []
             }]
         };
         window.myBar = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: barChartData,
             options: {
                 responsive: true,
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Hand Size'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: '% chance hand dealt can be sorted with one move'
+                        },
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
                 // legend: false,
                 // title: false
             }
