@@ -35,17 +35,19 @@ title: Shuffle Up and Deal - Riddler Classic
 ## Results
 
 <div id="running-status"></div>
-<ul id="odds-results"></ul>
-
-<button id="get-sample" style="display: none">Deal out random hand</button>
-<br>
-<button id="get-winning" style="display: none">Deal out winning hand</button>
-<br><input type="number" id="num" style="display: none" min="2" value="6" />
-<div id="sample-hand"></div>
 <div id="container" style="width: 75%;">
     <canvas id="canvas"></canvas>
 </div>
 
+<ul id="odds-results"></ul>
+
+<!--
+<button id="get-sample" style="display: none">Deal out random hand</button> 
+<br>
+<button id="get-winning" style="display: none">Deal out winning hand</button>
+<br><input type="number" id="num" style="display: none" min="2" value="6" />
+<div id="sample-hand"></div>
+-->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 <script>
@@ -119,8 +121,8 @@ title: Shuffle Up and Deal - Riddler Classic
                         }
                     }]
                 }
-                // legend: false,
-                // title: false
+                legend: false,
+                title: false
             }
         });
 
