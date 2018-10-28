@@ -76,11 +76,7 @@ title: Shuffle Up and Deal - Riddler Classic
             let data = event.data;
             switch (data && data.type) {
                 case 'calculate-odds':
-                    appendOddsResult(`Hand of ${
-                        data.handSize
-                    } card${data.handSize > 1 's' : ''} - ${
-                        parseFloat((data.odds * 100).toFixed(2))
-                    }% chance your dealt hand is "solvable"`)
+                    appendOddsResult(`Hand of ${data.handSize} cards - ${parseFloat((data.odds * 100).toFixed(2))}% chance your dealt hand is "solvable"`)
 
                     break;
             }
