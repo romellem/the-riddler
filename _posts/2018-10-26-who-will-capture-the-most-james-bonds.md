@@ -114,7 +114,7 @@ title: Shuffle Up and Deal - Riddler Classic
                     appendOddsResult(`Hand of ${data.handSize} cards - ${odds_percent}% chance your dealt hand is "solvable"`)
 
                     // Adds result to graph
-                    barChartData.datasets[0].push(odds_percent);
+                    barChartData.datasets[0].data.push(odds_percent);
                     window.myBar.update();
                     break;
             }
