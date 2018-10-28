@@ -60,7 +60,7 @@ title: Shuffle Up and Deal - Riddler Classic
             odds_results_list.appendChild(li);
         }
 
-        var worker = new Worker('{{ "assets/javascript/shuffle-up-and-deal.js" | relative_url }}');
+        var worker = new Worker('{{ "assets/javascript/shuffle-up-and-deal-worker.js" | relative_url }}');
 
         let hand_sizes = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
         let current_hand_size = hand_sizes.pop();
