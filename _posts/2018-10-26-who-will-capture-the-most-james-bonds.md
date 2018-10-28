@@ -194,6 +194,7 @@ title: Shuffle Up and Deal - Riddler Classic
 
         sample_hand_button.addEventListener('click', function(e) {
             sample_hand_loading.style.display = 'inline-block';
+            sample_hand.innerHTML = '';
             let num = parseInt(num_input.value, 10);
             if (isNaN(num) || num < 1) {
               num = 2;
