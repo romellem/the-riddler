@@ -42,7 +42,11 @@ title: Shuffle Up and Deal - Riddler Classic
 <ul id="odds-results"></ul>
 
 
-<button id="get-sample">Deal out random hand</button> 
+<button id="get-sample">Deal out random hand</button>
+<img
+    style="display: none"
+    src="data:image/gif;base64,R0lGODlhEAAQAPIGAAAAAMLCwkJCQpKSkmJiYoKCgv///wAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJCgAGACwAAAAAEAAQAAADM2i63P4wyklrC0IEKgAQnAdOmGYFBLExwboQWcG2rlHEwTDQLUsUOd2mBxkUCgNKa+dIAAAh+QQJCgAGACwAAAIACgAOAAADLWgWIqHQCABEVLPe1R4MBOFFRFNsRUNsYDFewTC8iixvQ1EMyxjEvyBLODQkAAAh+QQJCgAGACwAAAAACgAOAAADLWi6IRJrCQCECoU0ag1xxeBARuEQ0UUU5DUM7fK+qTEUYR0EcM3Ev51uB7wAEwAh+QQJCgAGACwAAAAADgAKAAADLWi6URQrLiJEkSaM0eqrkLFtAVEEAgAIylAUQ5SuSqCFNZjhWG3zmB8wOJQkAAAh+QQJCgAGACwCAAAADgAKAAADK2hqMRMrLuekCnCU8gqBDCZ2glBcYkSUxIJJgQdaUVDOtAAAAr3oPN/llgAAIfkECQoABgAsBgAAAAoADgAAAytoEdauiz0Yx5BQFTvN2EMXWNgUFETZFIJQdERLiGgZtKohAIDQ7T0RrpEAACH5BAkKAAYALAYAAgAKAA4AAAMqaKoR+609Fie1K4zhZiibNRSg1XAQUXQPIQgE835voQgAIARqh+ummSUBACH5BAUKAAYALAIABgAOAAoAAAMsaLpsES2+F9mEddEgBFbBMGACAAiMOCrlGRBFWBQD2L0dYYjfUuQZEKynSAAAOw=="
+/>
 <!-- <br>
 <button id="get-winning">Deal out winning hand</button> -->
 <br>
@@ -70,6 +74,7 @@ title: Shuffle Up and Deal - Riddler Classic
         let sample_hand = document.getElementById('sample-hand');
         let winning_hand_button = document.getElementById('get-winning');
         let sample_hand_button = document.getElementById('get-sample');
+        let sample_hand_loading = document.querySelector('#get-sample + img');
         let num_input = document.getElementById('num');
 
         function appendOddsResult(str) {
@@ -137,6 +142,7 @@ title: Shuffle Up and Deal - Riddler Classic
             let data = event.data;
             switch (data && data.type) {
                 case 'random-hand':
+                    sample_hand_loading.style.display = 'none';
                     sample_hand.innerHTML = '<ul>' + data.result + '</ul>';
 
                     break;
@@ -187,6 +193,7 @@ title: Shuffle Up and Deal - Riddler Classic
         // }
 
         sample_hand_button.addEventListener('click', function(e) {
+            sample_hand_loading.style.display = 'inline-block';
             let num = parseInt(num_input.value, 10);
             if (isNaN(num) || num < 1) {
               num = 2;
