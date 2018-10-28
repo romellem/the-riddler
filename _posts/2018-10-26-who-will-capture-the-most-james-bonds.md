@@ -43,10 +43,10 @@ title: Shuffle Up and Deal - Riddler Classic
 
 
 <button id="get-sample">Deal out random hand</button> 
+<!-- <br>
+<button id="get-winning">Deal out winning hand</button> -->
 <br>
-<button id="get-winning">Deal out winning hand</button>
-<br>
-<label>Hand Size: <input type="number" id="num" style="display: none" min="2" value="6" /></label>
+<label>Hand Size: <input type="number" id="num" min="2" value="6" /></label>
 
 <div id="sample-hand"></div>
 
