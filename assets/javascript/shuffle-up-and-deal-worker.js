@@ -127,8 +127,6 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
         if (typeof log === 'function') {
             log('<strong>Hand was dealt ALREADY SOLVED</strong>');
             log(`\tOriginal Hand: ${hand.map(c => S_HTML[c]).join(', ')}`);
-            log(` `);
-            log(` `);
         }
         return true;
     }
@@ -168,8 +166,6 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
     if (typeof log === 'function') {
         log('<strong>Hand CANNOT be solved</strong>');
         log(`\tHand: ${hand.map(c => S_HTML[c]).join(',')}`);
-        log(' ');
-        log(' ');
     }
     return false;
 }
