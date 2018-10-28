@@ -133,6 +133,12 @@ function dealHandAndSeeIfSolvable(hand_size = 6, log = false) {
     let hand_indices = getRandomCardIndices(hand_size);
     let hand = hand_indices.map(i => DECK[i]);
 
+    // This isn't clear in the rules, but if the original
+    // hand is already sorted, then return true
+    if (testIfHandPassesSortingRequirments(hand)) {
+        return true;
+    }
+
     for (let bunch_size = 1; bunch_size < hand.length; bunch_size++) {
         for (let i = 0; i < hand.length - bunch_size + 1; i++) {
             let remaining_hand = hand.slice(0);
