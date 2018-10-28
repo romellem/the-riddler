@@ -81,46 +81,25 @@ function testIfHandPassesSortingRequirments(hand) {
     });
     let suits = Object.keys(suits_lookup);
 
-    if (red_suit && black_suit) {
-        let max_groups = suits.length;
+    let max_groups = suits.length;
 
-        let hand_copy = hand.slice(0);
-        let current_card = hand_copy.pop();
-        let groups = 1;
-        while (hand_copy.length) {
-            let next_card = hand_copy.pop();
-            if (next_card !== current_card) {
-                if (SUIT_COLORS[next_card] === SUIT_COLORS[current_card]) {
-                    // Suits of the same color are next to each other!
-                    return false;
-                }
-
-                current_card = next_card;
-                groups++;
-
-                if (groups > max_groups) {
-                    // Failed the test!
-                    return false;
-                }
+    let hand_copy = hand.slice(0);
+    let current_card = hand_copy.pop();
+    let groups = 1;
+    while (hand_copy.length) {
+        let next_card = hand_copy.pop();
+        if (next_card !== current_card) {
+            if ((red_suit && black_suit) && SUIT_COLORS[next_card] === SUIT_COLORS[current_card]) {
+                // Suits of the same color are next to each other!
+                return false;
             }
-        }
-    } else {
-        let max_groups = suits.length;
 
-        let hand_copy = hand.slice(0);
+            current_card = next_card;
+            groups++;
 
-        let current_card = hand_copy.pop();
-        let groups = 1;
-        while (hand_copy.length) {
-            let next_card = hand_copy.pop();
-            if (next_card !== current_card) {
-                current_card = next_card;
-                groups++;
-
-                if (groups > max_groups) {
-                    // Failed the test!
-                    return false;
-                }
+            if (groups > max_groups) {
+                // Failed the test!
+                return false;
             }
         }
     }
