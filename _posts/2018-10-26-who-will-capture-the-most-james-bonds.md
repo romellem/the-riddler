@@ -50,6 +50,7 @@ title: Shuffle Up and Deal - Riddler Classic
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var color = Chart.helpers.color;
         var ctx = document.getElementById('canvas').getContext('2d');
         let odds_results_list = document.getElementById('odds-results');
         let running_status = document.getElementById('running-status');
