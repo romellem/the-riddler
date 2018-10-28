@@ -41,13 +41,15 @@ title: Shuffle Up and Deal - Riddler Classic
 
 <ul id="odds-results"></ul>
 
-<!--
-<button id="get-sample" style="display: none">Deal out random hand</button> 
+
+<button id="get-sample">Deal out random hand</button> 
 <br>
-<button id="get-winning" style="display: none">Deal out winning hand</button>
-<br><input type="number" id="num" style="display: none" min="2" value="6" />
+<button id="get-winning">Deal out winning hand</button>
+<br>
+<label>Hand Size: <input type="number" id="num" style="display: none" min="2" value="6" /></label>
+
 <div id="sample-hand"></div>
--->
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 <script>
@@ -65,6 +67,10 @@ title: Shuffle Up and Deal - Riddler Classic
         var ctx = document.getElementById('canvas').getContext('2d');
         let odds_results_list = document.getElementById('odds-results');
         let running_status = document.getElementById('running-status');
+        let sample_hand = document.getElementById('sample-hand');
+        let winning_hand_button = document.getElementById('get-winning');
+        let sample_hand_button = document.getElementById('get-sample');
+        let num_input = document.getElementById('num');
 
         function appendOddsResult(str) {
             let li = document.createElement('li');
@@ -130,6 +136,13 @@ title: Shuffle Up and Deal - Riddler Classic
         worker.onmessage = function (event) {
             let data = event.data;
             switch (data && data.type) {
+                case 'random-hand':
+                    sample_hand.innerHTML = '<ul>' + data.result + '</ul>';
+
+                    break;
+                case 'random-winning-hand':
+
+                    break;
                 case 'calculate-odds':
                     let odds_percent = parseFloat((data.odds * 100).toFixed(2));
                     appendOddsResult(`Hand of ${data.handSize} cards - ${odds_percent}% chance your dealt hand is "solvable"`)
@@ -151,67 +164,43 @@ title: Shuffle Up and Deal - Riddler Classic
                 running_status.innerHTML = `Finished all calcuations!`;
             }
         };
-    });
-    
 
-    /*
-        let sample_hand = document.getElementById('sample-hand');
-        let winning_hand_button = document.getElementById('get-winning');
-        let sample_hand_button = document.getElementById('get-sample');
-        let num_input = document.getElementById('num');
+        
 
 
-        function outputSampleHand(force_winning = false) {
-            var log_str;
-            var record_log = str => {
-                log_str += '<li>' + str + '</li>';
-            };
+        // function outputSampleHand(force_winning = false) {
+        //     var log_str;
+        //     var record_log = str => {
+        //         log_str += '<li>' + str + '</li>';
+        //     };
             
+        //     let num = parseInt(num_input.value, 10);
+        //     if (isNaN(num) || num < 1) {
+        //       num = 2;
+        //     }
+        //     do {
+        //         log_str = '';
+        //         var result = dealHandAndSeeIfSolvable(num, record_log);
+        //     } while (!result && force_winning);
+
+        //     sample_hand.innerHTML = '<ul>' + log_str + '</ul>'
+        // }
+
+        sample_hand_button.addEventListener('click', function(e) {
             let num = parseInt(num_input.value, 10);
             if (isNaN(num) || num < 1) {
               num = 2;
             }
-            do {
-                log_str = '';
-                var result = dealHandAndSeeIfSolvable(num, record_log);
-            } while (!result && force_winning);
-
-            sample_hand.innerHTML = '<ul>' + log_str + '</ul>'
-        }
-
-        sample_hand_button.addEventListener('click', function(e) {
-            outputSampleHand();
+            worker.postMessage({
+                type: 'random-hand',
+                handSize: num,
+            });
         })
-        winning_hand_button.addEventListener('click', function(e) {
-            sample_hand.innerHTML = 'Finding winning hand...';
-            setTimeout(function() {outputSampleHand(true)}, 200);
-        })
-
-        setTimeout(function() {
-            const SIMULATIONS = 100000;
-            let wins = 0;
-            for (let i = 0; i < SIMULATIONS; i++) {
-                if (dealHandAndSeeIfSolvable(4)) {
-                    wins++;
-                }
-            }
-
-            let game = document.getElementById('game');
-
-            game.innerHTML = `${wins} / ${SIMULATIONS} ≈ ${Math.round(wins / SIMULATIONS * 100)}% a 6-card hand is "solvable"`;
-
-            outputSampleHand(true);
-            
-            // Display button
-            sample_hand_button.style.display = null;
-            winning_hand_button.style.display = null;
-            num_input.style.display = null;
-            
-        }, 200)
-
-
+        // winning_hand_button.addEventListener('click', function(e) {
+        //     sample_hand.innerHTML = 'Finding winning hand...';
+        //     setTimeout(function() {outputSampleHand(true)}, 200);
+        // })
     });
-    */
 </script>
 <style>
 .red {

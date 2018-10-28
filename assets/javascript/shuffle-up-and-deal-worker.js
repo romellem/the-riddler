@@ -23,6 +23,15 @@ deck_suits.forEach(suit => {
     });
 });
 
+var log_str;
+function recordLog(str, wrapping_tag = 'li') {
+    if (wrapping_tag) {
+        log_str += `<${wrapping_tag}>${str}</${wrapping_tag}>`;
+    } else {
+        log_str += str;
+    }
+}
+
 // @link https://www.frankmitchell.org/2015/01/fisher-yates/
 // Shuffles array in-place
 function shuffle(array) {
@@ -185,13 +194,23 @@ function simulateOddsOfWinningWithHandSize(hand_size, total_simulations = 100000
 
 
 onmessage = function(e) {
-  // console.log('Worker has received data from main script');
   let data = e.data;
 
   let result;
   switch (data && data.type) {
     case 'random-hand':
+        let random_hand = dealHandAndSeeIfSolvable(data.handSize, recordLog);
+
+        result = {
+            type: data.type,
+            handSize: data.handSize,
+            result: log_str
+        };
+        break;
     case 'random-winning-hand':
+
+        break;
+
     case 'calculate-odds':
         let simulation_results = simulateOddsOfWinningWithHandSize(data.handSize, data.totalSimulations);
         result = {
