@@ -1,8 +1,8 @@
 ---
-title: Organize Cards in One Fell Swoop - Riddler Classic
+title: Shuffle Up and Deal - Riddler Classic
 ---
 
-# Organize Cards in One Fell Swoop - Riddler Classic
+# Shuffle Up and Deal - Riddler Classic
 
 > ([source](https://fivethirtyeight.com/features/who-will-capture-the-most-james-bonds/))
 >
@@ -34,7 +34,8 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
 ## Results
 
-<div id="game">Running...</div>
+<div id="running-status"></div>
+<ul id="odds-results"></ul>
 
 <button id="get-sample" style="display: none">Deal out random hand</button>
 <br>
@@ -49,15 +50,62 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 </style>
     
 <script>
-    {% include 2018-10-26-who-will-capture-the-most-james-bonds.js %}
+    document.addEventListener('DOMContentLoaded', function() {
+        let odds_results_list = document.getElementById('odds-results');
+        let running_status = document.getElementById('running-status');
 
+        function appendOddsResult(str) {
+            let li = document.createElement('li');
+            li.innerHTML = str;
+            odds_results_list.appendChild(li);
+        }
+
+        var worker = new Worker('{{ "assets/javascript/shuffle-up-and-deal.js" | relative_url }}');
+
+        let hand_sizes = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+        let current_hand_size = hand_sizes.pop();
+
+        running_status.innerHTML = `Calculating hand size of ${current_hand_size}`;
+        worker.postMessage({
+            type: 'calculate-odds',
+            handSize: current_hand_size,
+        });
+
+
+        worker.onmessage = function (event) {
+            let data = event.data;
+            switch (data && data.type) {
+                case 'calculate-odds':
+                    appendOddsResult(`Hand of ${
+                        data.handSize
+                    } card${data.handSize > 1 's' : ''} - ${
+                        parseFloat((data.odds * 100).toFixed(2))
+                    }% chance your dealt hand is "solvable"`)
+
+                    break;
+            }
+
+            if (hand_sizes.length > 0) {
+                current_hand_size = hand_sizes.pop();
+                running_status.innerHTML = `Calculating hand size of ${current_hand_size}`;
+                worker.postMessage({
+                    type: 'calculate-odds',
+                    handSize: current_hand_size,
+                });
+            } else {
+                running_status.innerHTML = `Finished all calcuations!`;
+            }
+        };
+    });
     
 
-    document.addEventListener('DOMContentLoaded', function() {
+    /*
         let sample_hand = document.getElementById('sample-hand');
         let winning_hand_button = document.getElementById('get-winning');
         let sample_hand_button = document.getElementById('get-sample');
         let num_input = document.getElementById('num');
+
+
         function outputSampleHand(force_winning = false) {
             var log_str;
             var record_log = str => {
@@ -85,10 +133,10 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
         })
 
         setTimeout(function() {
-            const SIMULATIONS = 10000;
+            const SIMULATIONS = 100000;
             let wins = 0;
             for (let i = 0; i < SIMULATIONS; i++) {
-                if (dealHandAndSeeIfSolvable(6)) {
+                if (dealHandAndSeeIfSolvable(4)) {
                     wins++;
                 }
             }
@@ -108,4 +156,5 @@ title: Organize Cards in One Fell Swoop - Riddler Classic
 
 
     });
+    */
 </script>
