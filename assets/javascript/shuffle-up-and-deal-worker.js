@@ -199,6 +199,7 @@ onmessage = function(e) {
   let result;
   switch (data && data.type) {
     case 'random-hand':
+        log_str = '';
         let random_hand = dealHandAndSeeIfSolvable(data.handSize, recordLog);
 
         result = {
