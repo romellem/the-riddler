@@ -162,7 +162,7 @@ let matchups = [
 ];
 
 // 1_000_000
-const SIMULATIONS = 1;
+const SIMULATIONS = 200000;
 
 const wins = {
 	moonwalker: 0,
