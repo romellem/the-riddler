@@ -14,7 +14,7 @@
  * just like in other baseball leagues. Which of the three teams is most
  * likely to have the best record at the end of the season?
  */
-const { green, red, cyan, blue, magenta } = require('chalk');
+const { green, red, cyan, blue, magenta, yellow } = require('chalk');
 
 class Team {
 	constructor(name, strikeout, hit, hit_action) {
@@ -70,7 +70,7 @@ class Game {
 		this.outs = 0;
 
 
-		log && console.log(`\n${cyan(this.inningToString())}: ${blue(offense.name)} up to bat`);
+		log && console.log(`\n${cyan(this.inningToString())}: ${blue(offense.name)} up to bat (${this.currentScoreToString()})`);
 
 		while (this.outs < 3) {
 			let at_bat = offense.bat();
@@ -90,7 +90,7 @@ class Game {
 						this[score_str]++;
 						log && console.log(`${green('Walk, scores a run!')} (${this.currentScoreToString()})`);
 					} else {
-						log && console.log(`${green('Walk, scores a run!')} (${magenta(this.bases.filter(v => v).length)} men on base)`);
+						log && console.log(`${green('Walk!')} (${magenta(this.bases.filter(v => v).length)} men on base)`);
 					}
 
 					this.bases.pop();
@@ -120,6 +120,7 @@ class Game {
 
 	play() {
 		let log = this.log;
+		log && console.log(`${yellow(this.home_team.name.toUpperCase())} vs ${yellow(this.away_team.name.toUpperCase())}`);
 		for (let i = 0; i < 18; i++) {
 			this.halfInning();
 		}
@@ -181,3 +182,8 @@ let total = 4 * SIMULATIONS;
 console.log('Moonwalker: ' + (wins.moonwalker / total * 100) + '%');
 console.log('Doubloons: ' + (wins.doubloons / total * 100) + '%');
 console.log('Taters: ' + (wins.taters / total * 100) + '%');
+
+console.log('=======================\nIn A 162 Game Season...\n=======================');
+console.log('Taters: ' + green(Math.round(wins.taters / total * 162)) + ' wins');
+console.log('Moonwalker: ' + yellow(Math.round(wins.moonwalker / total * 162)) + ' wins');
+console.log('Doubloons: ' + red(Math.round(wins.doubloons / total * 162)) + ' wins');
