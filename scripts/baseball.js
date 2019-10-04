@@ -39,7 +39,7 @@ class Team {
 }
 
 class Game {
-	constructor({ home_team, away_team, log = true }) {
+	constructor({ home_team, away_team, log = false }) {
 		// Math is easier with 18 innings. Odd is 'top' (away bats), even is 'bottom' (home bats)
 		this.inning = 1;
 		this.home_team = home_team;
@@ -145,9 +145,9 @@ class Game {
 	}
 }
 
-const moonwalker = new Team('moonwalker', 0.4, 0.6, { result: 'walk' });
-const doubloons = new Team('doubloons', 0.2, 0.8, { result: 'double' });
-const taters = new Team('taters', 0.1, 0.9, { result: 'home_run' });
+const moonwalker = new Team('moonwalker', 0.6, 0.4, { result: 'walk' });
+const doubloons = new Team('doubloons', 0.8, 0.2, { result: 'double' });
+const taters = new Team('taters', 0.9, 0.1, { result: 'home_run' });
 
 // Hardcode the matchups
 
