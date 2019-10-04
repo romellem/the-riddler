@@ -14,8 +14,7 @@
  * just like in other baseball leagues. Which of the three teams is most
  * likely to have the best record at the end of the season?
  */
-
-// const G = require('generatorics');
+const { green, red, cyan, blue, magenta } = require('chalk');
 
 class Team {
 	constructor(name, strikeout, hit, hit_action) {
@@ -40,7 +39,7 @@ class Team {
 }
 
 class Game {
-	constructor({ home_team, away_team }) {
+	constructor({ home_team, away_team, log = true }) {
 		// Math is easier with 18 innings. Odd is 'top' (away bats), even is 'bottom' (home bats)
 		this.inning = 1;
 		this.home_team = home_team;
@@ -51,9 +50,12 @@ class Game {
 
 		this.outs;
 		this.bases = [false, false, false];
+
+		this.log = log;
 	}
 
 	halfInning() {
+		let log = this.log;
 		let offense, score_str;
 
 		if (this.inning % 2 === 0) {
@@ -67,6 +69,9 @@ class Game {
 
 		this.outs = 0;
 
+
+		log && console.log(`\n${cyan(this.inningToString())}: ${blue(offense.name)} up to bat`);
+
 		while (this.outs < 3) {
 			let at_bat = offense.bat();
 			const { result } = at_bat;
@@ -74,6 +79,7 @@ class Game {
 			switch (result) {
 				case 'out':
 					this.outs++;
+					log && console.log(`${red('Out!')} (${this.outs} outs)`);
 					break;
 
 				case 'walk':
@@ -82,6 +88,9 @@ class Game {
 
 					if (this.bases[3] === true) {
 						this[score_str]++;
+						log && console.log(`${green('Walk, scores a run!')} (${this.currentScoreToString()})`);
+					} else {
+						log && console.log(`${green('Walk, scores a run!')} (${magenta(this.bases.filter(v => v).length)} men on base)`);
 					}
 
 					this.bases.pop();
@@ -90,6 +99,9 @@ class Game {
 				case 'double':
 					if (this.bases[1] === true) {
 						this[score_str]++;
+						log && console.log(`${green('Double, scores a run!')} (${this.currentScoreToString()})`);
+					} else {
+						log && console.log(`${green('Double, runner on base')}`);
 					}
 
 					this.bases[1] = true;
@@ -97,6 +109,7 @@ class Game {
 
 				case 'home_run':
 					this[score_str]++;
+					log && console.log(`${green('Home run!')} (${this.currentScoreToString()})`);
 					break;
 			}
 		}
@@ -106,6 +119,7 @@ class Game {
 	}
 
 	play() {
+		let log = this.log;
 		for (let i = 0; i < 18; i++) {
 			this.halfInning();
 		}
@@ -115,8 +129,19 @@ class Game {
 			this.halfInning();
 		}
 
+		log && console.log(`==================\n${blue('Final score')} | ${this.currentScoreToString()}\n==================`);
+
 		// Return winning teams name
 		return this.home_score > this.away_score ? this.home_team.name : this.away_team.name;
+	}
+
+	inningToString() {
+		let true_inning = Math.ceil(this.inning / 2);
+		return (this.inning % 2 === 0 ? 'Bottom' : 'Top') + ' of the ' + true_inning;
+	}
+
+	currentScoreToString() {
+		return `${this.home_team.name}: ${magenta(this.home_score)} - ${this.away_team.name}: ${magenta(this.away_score)}`;
 	}
 }
 
@@ -136,7 +161,7 @@ let matchups = [
 ];
 
 // 1_000_000
-const SIMULATIONS = 10000;
+const SIMULATIONS = 1;
 
 const wins = {
 	moonwalker: 0,

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/romellem/the-riddler#readme",
   "dependencies": {
+    "chalk": "^2.4.2",
     "puppeteer": "^1.4.0"
   }
 }
